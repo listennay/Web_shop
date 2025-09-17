@@ -1,0 +1,28 @@
+{
+  "name": "sales-website",
+  "version": "1.0.0",
+  "description": "A Node.js sales website with homepage",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker-compose up --build -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:build": "docker build -t sales-website ."
+  },
+  "keywords": ["nodejs", "express", "sales", "website"],
+  "author": "IT Student",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "path": "^0.12.7",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

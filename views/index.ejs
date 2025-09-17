@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Sales Website</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Include Header -->
+    <%- include('partials/header') %>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to SalesWeb</h1>
+                <p class="hero-subtitle"><%= message %></p>
+                <a href="/products" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                <% if (products && products.length > 0) { %>
+                    <% products.forEach(product => { %>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="<%= product.image %>" alt="<%= product.name %>" onerror="this.src='/images/placeholder.jpg'">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name"><%= product.name %></h3>
+                                <p class="product-description"><%= product.description %></p>
+                                <div class="product-price"><%= product.formatPrice() %></div>
+                                <button class="btn btn-secondary">Add to Cart</button>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="no-products">
+                        <p>No featured products available at the moment.</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Fast Shipping</h3>
+                    <p>Quick and reliable delivery to your doorstep</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Payment</h3>
+                    <p>Safe and secure payment processing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Customer support available around the clock</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>Hassle-free return and exchange policy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Footer -->
+    <%- include('partials/footer') %>
+    
+    <script src="/js/main.js"></script>
+</body>
+</html>

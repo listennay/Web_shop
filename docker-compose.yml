@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  sales-website:
+    build: .
+    container_name: sales-website
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # Mount logs directory for persistence
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - sales-network
+
+  # Optional: Add a reverse proxy (nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: sales-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - sales-website
+    restart: unless-stopped
+    networks:
+      - sales-network
+
+networks:
+  sales-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local
